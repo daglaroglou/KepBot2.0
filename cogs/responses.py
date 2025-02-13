@@ -20,7 +20,7 @@ class Responses(commands.Cog):
         if message.author == self.bot.user:
             return
         if "sex" in message.content.lower():
-            await message.reply("https://cdn.discordapp.com/attachments/712293922872754196/1282410030427013282/VID_40020710_172718_406.mp4?ex=67ae3c69&is=67aceae9&hm=fdd4546e295c31901d697ea952fbab442ed5afd629a3673492fe114a483eac6e&")
+            await message.reply("https://cdn.discordapp.com/attachments/712293922872754196/1282410030427013282/VID_40020710_172718_406.mp4?ex=67ae3c69&is=67aceae9&hm=fdd4546e295c31901d697ea952fbab442ed5afd629a3673492fe114a483eac6e")
         async with aiosqlite.connect(self.db_path) as db:
             async with db.execute("SELECT response FROM responses WHERE text = ?", (message.content.lower(),)) as cursor:
                 row = await cursor.fetchone()
@@ -33,7 +33,7 @@ class Responses(commands.Cog):
         async with aiosqlite.connect(self.db_path) as db:
             await db.execute("INSERT OR REPLACE INTO responses (text, response) VALUES (?, ?)", (text.lower(), response))
             await db.commit()
-        await ctx.response.send_message(f":white_check_mark: Prostethike: '{text}' -> '{response}'")
+        await ctx.response.send_message(f":white_check_mark: Prostethike: '{text}' -> '{response}'", ephemeral=True)
 
     @commands.Cog.listener()
     async def on_ready(self):
