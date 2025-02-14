@@ -40,7 +40,18 @@ class Responses(commands.Cog):
         async with aiosqlite.connect(self.db_path) as db:
             await db.execute("DELETE FROM responses WHERE text = ?", (text.lower(),))
             await db.commit()
-        await ctx.response.send_message(f":white_check_mark: Afaireshke: '{text}'", ephemeral=True)
+        await ctx.response.send_message(f":white_check_mark: Afairethike: '{text}'", ephemeral=True)
+
+    @nextcord.slash_command(name="listresponses", description="Emfanish olwn twn responses.")
+    async def list_responses(self, ctx: nextcord.Interaction):
+        async with aiosqlite.connect(self.db_path) as db:
+            async with db.execute("SELECT text, response FROM responses") as cursor:
+                rows = await cursor.fetchall()
+                if rows:
+                    response_list = "\n".join([f"'{row[0]}' -> '{row[1]}'" for row in rows])
+                    await ctx.response.send_message(f"**Responses:**\n{response_list}", ephemeral=True)
+                else:
+                    await ctx.response.send_message("Den vrethikan responses.", ephemeral=True)
 
     @commands.Cog.listener()
     async def on_ready(self):
