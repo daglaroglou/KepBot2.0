@@ -49,7 +49,10 @@ class Responses(commands.Cog):
                 rows = await cursor.fetchall()
                 if rows:
                     response_list = "\n".join([f"'{row[0]}' -> '{row[1]}'" for row in rows])
-                    await ctx.response.send_message(f"**Responses:**\n{response_list}", ephemeral=True)
+                    embed = nextcord.Embed(title="Responses", description=response_list)
+                    embed.set_footer(text="KepBot V2")
+                    embed.color = nextcord.Color.yellow()
+                    await ctx.response.send_message(embed=embed, ephemeral=True)
                 else:
                     await ctx.response.send_message("Den vrethikan responses.", ephemeral=True)
 
