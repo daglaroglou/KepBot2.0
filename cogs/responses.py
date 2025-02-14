@@ -3,7 +3,7 @@ import aiosqlite
 import nextcord
 from nextcord.ext import commands
 
-class AddResponses(commands.Cog):
+class Responses(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
         self.db_path = os.path.join(os.path.dirname(__file__), "responses.db")
@@ -47,4 +47,4 @@ class AddResponses(commands.Cog):
         await self.cog_load()
 
 def setup(bot):
-    bot.add_cog(AddResponses(bot))
+    bot.add_cog(Responses(bot))
