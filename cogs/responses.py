@@ -3,7 +3,7 @@ import aiosqlite
 import nextcord
 from nextcord.ext import commands
 
-class Responses(commands.Cog):
+class AddResponses(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
         self.db_path = os.path.join(os.path.dirname(__file__), "responses.db")
@@ -28,16 +28,23 @@ class Responses(commands.Cog):
                     await message.reply(row[0])
         await self.bot.process_commands(message)
 
-    @nextcord.slash_command(name="responses", description="Add a new response.")
+    @nextcord.slash_command(name="addresponse", description="Prosthikh neou response.")
     async def responses(self, ctx: nextcord.Interaction, text: str, response: str):
         async with aiosqlite.connect(self.db_path) as db:
             await db.execute("INSERT OR REPLACE INTO responses (text, response) VALUES (?, ?)", (text.lower(), response))
             await db.commit()
         await ctx.response.send_message(f":white_check_mark: Prostethike: '{text}' -> '{response}'", ephemeral=True)
 
+    @nextcord.slash_command(name="removeresponse", description="Afairesh response.")
+    async def remove_response(self, ctx: nextcord.Interaction, text: str):
+        async with aiosqlite.connect(self.db_path) as db:
+            await db.execute("DELETE FROM responses WHERE text = ?", (text.lower(),))
+            await db.commit()
+        await ctx.response.send_message(f":white_check_mark: Afaireshke: '{text}'", ephemeral=True)
+
     @commands.Cog.listener()
     async def on_ready(self):
         await self.cog_load()
 
 def setup(bot):
-    bot.add_cog(Responses(bot))
+    bot.add_cog(AddResponses(bot))
