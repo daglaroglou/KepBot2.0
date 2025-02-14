@@ -9,6 +9,8 @@ bot = commands.Bot(intents=nextcord.Intents.all())
 
 bot.load_extension("cogs.responses")
 print("Loaded cogs.responses")
+bot.load_extension("cogs.gemini")
+print("Loaded cogs.gemini")
 
 @bot.event
 async def on_ready():
