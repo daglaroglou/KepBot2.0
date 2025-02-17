@@ -11,6 +11,8 @@ bot.load_extension("cogs.responses")
 print("Loaded cogs.responses")
 bot.load_extension("cogs.gemini")
 print("Loaded cogs.gemini")
+bot.load_extension("cogs.roll")
+print("Loaded cogs.roll")
 
 @bot.event
 async def on_ready():
