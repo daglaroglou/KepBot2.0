@@ -13,6 +13,12 @@ bot.load_extension("cogs.gemini")
 print("Loaded cogs.gemini")
 bot.load_extension("cogs.roll")
 print("Loaded cogs.roll")
+bot.load_extension("cogs.phubcomment")
+print("Loaded cogs.phcomment")
+bot.load_extension("cogs.achievement")
+print("Loaded cogs.achievement")
+bot.load_extension("cogs.snipe")
+print("Loaded cogs.snipe")
 
 @bot.event
 async def on_ready():
