@@ -7,7 +7,7 @@ class Roll(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    @nextcord.slash_command(name="roll", description="Roll a die.")
+    @nextcord.slash_command(name="roll", description="Roll a dice.")
     async def roll(self, ctx: nextcord.Interaction, sides: int):
         if sides < 0:
             await ctx.response.send_message("Impossible die.", ephemeral=True)
